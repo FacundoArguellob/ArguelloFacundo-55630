@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout, authenticate
@@ -13,7 +13,7 @@ from .models import *
 
 
 
-# TODO: Acomodoar los posteos de mas nuevo a mas viejo 
+# TODO:
 # TODO:
 # TODO: agregar los .os correspondientes para que el proyecto funcione en el equipo del tutor
 # TODO: barra de busqueda para los posteos
@@ -66,8 +66,33 @@ class UsuarioCreateView(CreateView):
 #Blog
 @login_required
 def dashboard(request):
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-date_pub')
+    comments = Comment.objects.all()
+    contador_comentarios = 0
+    for post in posts:
+        for comment in comments:
+            if post.id == comment.post_id:
+                contador_comentarios += 1
+                print(contador_comentarios)
+
     return render(request, 'dashboard.html', {'posts': posts})
+
+
+def postDetails(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comments = post.comments.all()
+
+    if request.method == 'POST':
+        comment_form = ComentarioForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post  # Asocia el comentario con el post actual
+            new_comment.author = request.user  # Assign the logged-in user as the author
+            new_comment.save()
+            return redirect(reverse_lazy('dashboard'))
+    else:
+        comment_form = ComentarioForm()
+    return render(request, 'postDetails.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
 
 
 class PostCreateView(CreateView):

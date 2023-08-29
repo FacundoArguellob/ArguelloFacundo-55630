@@ -8,7 +8,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" >Current user: {{request.user.username}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'editUser' %}">{{request.user.username}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -16,11 +16,10 @@
 {% endblock navbar %}
 
 {% block header %}
-        <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Crea un Post!</h1>
-            </div>
-        </header>
+<br>
+<br>
+<br>
+<br>
 {% endblock header %}
 
 {% block content %}
@@ -39,6 +38,11 @@
                             {{ form.content.label_tag }}
                             {{ form.content }}
                             {{ form.content.errors }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.category.label_tag }}
+                            {{ form.category}}
+                            {{ form.category.errors }}
                         </div>
                         <button type="submit" class="btn btn-primary">Crear Post</button>
                     </form>

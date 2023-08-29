@@ -1,0 +1,72 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+
+{% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="{% url 'dashboard' %}">Volver al Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'editUser' %}">{{request.user.username}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+{% endblock navbar %}
+
+{% block header %}
+<br>
+<br>
+{% endblock header %}
+
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <h6 class="card-subtitle mb-2 text-muted">Categoria: {{ post.category }}</h6>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            {% if comments|length == 0 %}
+            <div>
+                <small>No hay comentarios</small>
+                <br>
+                <br>
+            </div>
+            {% else %}
+            <div class="list-group">
+                {% for comment in comments %}
+                    <div class="list-group-item">
+                        <p class="mb-1">{{ comment.text }}</p>
+                        <small class="text-muted">Autor: {{ comment.author }} Creado el: {{ comment.created_date }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-10">
+        <div class="col-md-8">
+            <h3>Agregar Comentario</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button class="btn btn-primary mt-2" type="submit">Enviar Comentario</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
