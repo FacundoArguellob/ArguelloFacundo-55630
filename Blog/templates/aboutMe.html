@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block navbar %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+                <div class="container px-4">
+                    <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'aboutMe' %}">Acerca de Mí</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registro</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+{% endblock navbar %}
+
+{% block header %}
+
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Acerca de Mi</h1>
+        </div>
+    </header>
+
+{% endblock header %}
+
+
+{% block content %}
+<section>
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="card rounded">
+          <div class="card-body">
+            <h5 class="card-title">Información Personal</h5>
+            <ul class="list-unstyled">
+              <li><strong>Nombre:</strong> Facundo</li>
+              <li><strong>Apellido:</strong> Arguello</li>
+              <li><strong>Correo Electrónico:</strong> facundo.arguellob@gmail.com</li>
+              <li><strong>GitHub:</strong> <a href="https://github.com/FacundoArguellob" target="_blank">https://github.com/FacundoArguellob</a></li>
+              <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/facundo-arguello/" target="_blank">https://www.linkedin.com/in/facundo-arguello/</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card rounded">
+          <div class="card-body">
+            <h5 class="card-title">¿Quien soy?</h5>
+            <p>
+              Soy un autodidacta apasionado por el desarrollo de software en Python, con conocimientos en el framework Django y experiencia en el manejo de bases de datos MySQL. Mi enfoque se centra en la creación de aplicaciones backend eficientes y escalables. Claramente mi pasión no es el diseño jajaj
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

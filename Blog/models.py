@@ -1,6 +1,6 @@
-from django.db import models
+from django.db                  import models
 from django.contrib.auth.models import User
-from django.utils.timezone import now
+from django.utils.timezone      import now
 
 
 class Category(models.Model):
@@ -8,6 +8,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,7 +31,6 @@ class Comment(models.Model):
         return self.text
     
 
-    
 class Avatar(models.Model):
     imagen = models.ImageField(upload_to="avatares")
     user = models.ForeignKey(User, on_delete=models.CASCADE)

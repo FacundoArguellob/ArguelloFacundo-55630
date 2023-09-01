@@ -1,0 +1,19 @@
+requerido: (tener Python 3.11.4 o la ultima version) tambien es recomendable seguir estos pasos para crear el entorno virtual y evitar posibles errores
+
+
+1- con el cmd o terminal posicionarse en la carpeta donde se haya clonado el repositorio.
+
+2- crear el entorno virtual (PD: tener previamente instalado virtalenv). 
+
+(PARA WINDOWS: 'virtualenv -p python3 venv') 
+(PARA LINUX: 'python -m venv venv')
+
+3- despues activas el entorno con:
+ 
+(PARA WINDOWS: '.\venv\Scripts\activate')
+(PARA LINUX: 'source ./venv/bin/activate' )
+
+4- luego ejecutar 'pip install -r blogIngresantesUTN/requirements.txt' que instala todas las dependecias del proyecto con sus versiones
+
+
+si tenes dudad podes consultar la documentacion oficial de Python (https://docs.python.org/3/library/venv.html)

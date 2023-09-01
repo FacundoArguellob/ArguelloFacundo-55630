@@ -13,28 +13,15 @@ from .forms                         import *
 from .models                        import *
 
 
-
-# TODO:
+# TODO: FIX footer dashboard
 # TODO: FIX comentarios post, se salen del border
-# TODO: agregar los .os correspondientes para que el proyecto funcione en el equipo del tutor
-# TODO: barra de busqueda para los posteos
-# TODO: archivo readme.md con: (nombre del proyecto, objetivo funcional, descripcion de modelos, usuario admin + contraseña)
-
-
-# Objetivos del proyecto final
-# 1- diseño no usado en clase, con un menu con al menos 4 links
-# 2- login, logout, registro, edit user + foto de perfil o avatar del usuario logeado
-# 3- funcionalidad CRUD de al menos 4 modelos con sus formularios y unicamente habilitados para usuarios logueados
-# 4- About me page con la informacion del alumno
-# 5- video mostrando el uso de la pagina y sus funciones generales (no mas de 10min)
-# 6- debe incluir un exel con al menos 5 casos de pruebas unitarias
-# 7- puede uncluir un search como filtro para buscar informacion 
-
 
 
 def index(request):
     return render(request, 'index.html')
 
+def about_me(request):
+    return render(request, 'aboutMe.html')
 
 #Login
 def login_views(request):
@@ -134,7 +121,6 @@ class UserUpdateView(LoginRequiredMixin,UpdateView):
 #Mis posteos
 @login_required
 def my_posts(request):
-    print('flag')
     posts = Post.objects.filter(author=request.user)
     return render(request, 'myPosts.html', {'posts': posts})
 
@@ -169,15 +155,15 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
 @login_required
 def add_avatar(request):
     if request.method == "POST":
-        form = AvatarForm(request.POST, request.FILES) # Diferente a los forms tradicionales
+        form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
             u = User.objects.get(username=request.user)
-            # ____ Para borrar el avatar viejo
+            #Para borrar el avatar viejo
             avatarViejo = Avatar.objects.filter(user=u)
             if len(avatarViejo) > 0:
                 for i in range(len(avatarViejo)):
                     avatarViejo[i].delete()
-            # ____ Guardar el nuevo
+            #Guardar el nuevo
             avatar = Avatar(user=u, imagen=form.cleaned_data['imagen'])
             avatar.save()
             return redirect('dashboard')

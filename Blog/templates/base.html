@@ -20,7 +20,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'aboutMe' %}">Acerca de Mí</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registro</a></li>
                     </ul>
@@ -32,8 +32,7 @@
         {% block header %}
         <header class="bg-primary bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Bienvenidos Ingresantes</h1>
-                <p class="lead">Aca van a encontrar toda la informacion, fechas, apuntes y mucho mas para que puedas empezar tu travesia por la UTN</p>
+                <h1 class="fw-bolder">¡Bienvenidos Ingresantes!</h1>
             </div>
         </header>
         {% endblock header %}
