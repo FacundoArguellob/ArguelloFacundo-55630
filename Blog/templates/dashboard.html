@@ -27,8 +27,20 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'editUser' %}"
-            >{{request.user.username}}</a
+            >{{request.user.username}}</a 
           >
+        </li>
+
+        <li class="nav-item">
+          {% if avatar.imagen.url %}
+           <div class="text-center">
+              <img src="{{ avatar.imagen.url }}" height="40px" weight="40px"/>
+            </div>
+            {% else %}
+            <div class="text-center">
+              <img src="{% static 'default/avatars/default.png' %}" height="40px" weight="40px"/>
+            </div>
+            {% endif %}
         </li>
       </ul>
     </div>
@@ -92,4 +104,5 @@
     </div>
   </div>
 </div>
+
 {% endblock content %}

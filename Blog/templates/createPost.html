@@ -23,31 +23,26 @@
 {% endblock header %}
 
 {% block content %}
-    <section class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form method="post" class="border p-4">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            {{ form.title.label_tag }}
-                            {{ form.title }}
-                            {{ form.title.errors }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form.content.label_tag }}
-                            {{ form.content }}
-                            {{ form.content.errors }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form.category.label_tag }}
-                            {{ form.category}}
-                            {{ form.category.errors }}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Crear Post</button>
-                    </form>
-                </div>
-            </div>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+    <form method="post" class="border p-4">
+        {% csrf_token %}
+        <h2 class="mb-4">Crear Post</h2>
+        <div class="mb-3">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {{ form.title.errors }}
         </div>
-    </section>
+        <div class="mb-3">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {{ form.content.errors }}
+        </div>
+        <div class="mb-3">
+            {{ form.category.label_tag }}
+            {{ form.category}}
+            {{ form.category.errors }}
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Post</button>
+    </form>
+</div>
 {% endblock content %}

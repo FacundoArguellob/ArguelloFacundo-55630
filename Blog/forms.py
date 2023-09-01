@@ -24,4 +24,5 @@ class ComentarioForm(forms.ModelForm):
         model = Comment
         fields = ['text']
 
-
+class AvatarForm(forms.Form):
+    imagen = forms.ImageField(required=True)

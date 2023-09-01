@@ -9,7 +9,6 @@ from django.db.models               import Q
 from django.contrib.auth.models     import User
 from django.urls                    import reverse_lazy
 
-
 from .forms                         import *
 from .models                        import *
 
@@ -47,6 +46,12 @@ def login_views(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            try:
+                avatar = Avatar.objects.get(user_id=request.user.id).imagen.url
+            except:
+                avatar = "/media/avatares/default.png"
+            finally:
+                request.session["avatar"] = avatar
             return redirect('dashboard')
         else:
             return render(request, 'login.html', {'alert': 'Invalid username or password', 'form': form})
@@ -71,7 +76,11 @@ class UsuarioCreateView(CreateView):
 def dashboard(request):
     posts = Post.objects.order_by('-date_pub')
     comments = Comment.objects.all()
-    return render(request, 'dashboard.html', {'posts': posts, 'comments': comments})
+    try:
+        avatar = Avatar.objects.get(user_id= request.user.id)
+    except:
+        avatar = 'media/avatares/default.png'
+    return render(request, 'dashboard.html', {'posts': posts, 'comments': comments, 'avatar': avatar})
 
 
 @login_required
@@ -155,3 +164,23 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     template_name = 'deletePost.html'
     success_url = reverse_lazy('myPosts')
+
+
+@login_required
+def add_avatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES) # Diferente a los forms tradicionales
+        if form.is_valid():
+            u = User.objects.get(username=request.user)
+            # ____ Para borrar el avatar viejo
+            avatarViejo = Avatar.objects.filter(user=u)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            # ____ Guardar el nuevo
+            avatar = Avatar(user=u, imagen=form.cleaned_data['imagen'])
+            avatar.save()
+            return redirect('dashboard')
+    else:
+        form = AvatarForm()
+    return render(request, "addAvatar.html", {'form': form })
