@@ -28,8 +28,10 @@ OS: Ubuntu 23.04
 Contacto
 email: facundo.arguellob@gmail.com
 
+VIDEO EXPLICATIVO (Link a Drive): https://drive.google.com/drive/folders/1IQeWueDjvhVDz_3-cPMyuF3CRh74HFXE?usp=sharing
 
 Usuario administrador:
 
 username: admin
+
 password: admin
